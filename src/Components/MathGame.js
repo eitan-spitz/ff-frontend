@@ -47,7 +47,8 @@ class MathGame extends React.Component {
        this.setState({solutionValue: e.target.value}) 
     }
 
-    
+    /// Want a handler for changing levels
+    /** We want to put a dispatch to be able to have a global counter, access level information and be able to increase and decrease levels */
 
     submitHandler = (e) => {
         e.preventDefault()
