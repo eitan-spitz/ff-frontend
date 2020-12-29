@@ -11,6 +11,14 @@ class GameContainer extends React.Component {
         timer: null
     }
 
+    /** Want to create dynamic links to individual games -Demetrio
+        Make Timer into Global State and sub and pub on Timer componenet 
+    * */
+
+    /** Immplement Auth -Eitan 
+     
+    * */
+
     componentDidMount() {
         fetch("http://localhost:3000/games")
         .then(r => r.json())
