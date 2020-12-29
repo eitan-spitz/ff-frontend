@@ -11,6 +11,12 @@ class GameContainer extends React.Component {
         timer: null
     }
 
+    /** Immplenting Auth - Eitan
+     * 
+     * 1. Finding a dynamic way of getting games to show up
+     * 2. Putting Timer into global state(Redux) -Demetrio
+     */
+
     componentDidMount() {
         fetch("http://localhost:3000/games")
         .then(r => r.json())
