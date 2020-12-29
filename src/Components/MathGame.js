@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import MathForm from './MathFrom'
+import MathForm from './MathForm'
 import { incrementPoints, decrementPoints } from '../Redux/actions'
 
 class MathGame extends React.Component {
@@ -120,9 +120,6 @@ class MathGame extends React.Component {
     changeHandler = (e) => {
         this.setState({ solutionValue: e.target.value })
     }
-
-    /// Want a handler for changing levels
-    /** We want to put a dispatch to be able to have a global Points, access level information and be able to increase and decrease levels */
 
     submitHandler = (e) => {
         e.preventDefault()
