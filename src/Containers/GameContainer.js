@@ -9,7 +9,6 @@ class GameContainer extends React.Component {
         apiRespone: [],
         game: null,
         timer: null
-
     }
 
     componentDidMount() {
@@ -34,7 +33,7 @@ class GameContainer extends React.Component {
         <h1> Game Container</h1>
         <Switch>
 
-            <Route path="/games/math" render={ () => {
+            <Route path={`/games/${this.state.game}`} render={ () => {
                 return(
                     <>
                     <MathGame timer={this.state.timer}/>
