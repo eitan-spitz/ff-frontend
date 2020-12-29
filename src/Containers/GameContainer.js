@@ -1,12 +1,12 @@
 import React from 'react'
 import MathGame from '../Components/MathGame'
 
-class MathContainer extends React.Component {
+class GameContainer extends React.Component {
 
     render (){
         return (
         <>
-        <h1>Math Container!</h1>
+        <h1>Game Container!</h1>
         <MathGame />
         </>
         )
@@ -14,4 +14,4 @@ class MathContainer extends React.Component {
 }
 
 
-export default MathContainer
+export default GameContainer

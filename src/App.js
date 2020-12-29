@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import MathContainer from './Containers/MathContainer';
+import GameContainer from './Containers/GameContainer';
 
 
 class App extends React.Component {
@@ -17,7 +17,7 @@ class App extends React.Component {
       <div className="App">
         <Switch>
           <Route path='/home' render={() => <h1>Welcome!</h1>} />
-          <Route path='/math-game' component={MathContainer} />
+          <Route path='/game' component={GameContainer} />
         </Switch>
         
       </div>
