@@ -2,7 +2,7 @@ import {combineReducers} from 'redux'
 
 const defaultState = {
     users: [],
-    level: 1
+    points: 0
 }
 
 function usersReducer(prevState = defaultState.users, action){
@@ -10,15 +10,22 @@ function usersReducer(prevState = defaultState.users, action){
     return prevState
 }
 
-function levelReducer(prevState = defaultState.level, action){
-   console.log("In levelReducer: ", prevState, action)
-   return prevState
+
+function pointsReducer(prevState = defaultState.points, action){
+    switch (action.type) {
+        case "INCREMENT_POINTS":
+            return ++prevState
+        case "DECREMENT_POINTS":
+            return --prevState
+        default:
+            return prevState
+    }
 }
 
 
 const rootReducer = combineReducers({
    users: usersReducer,
-   level: levelReducer
+   points: pointsReducer
 })
 
-export default rootReducer
+export default rootReducer 
