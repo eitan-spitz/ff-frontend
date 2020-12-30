@@ -11,10 +11,9 @@ class GameContainer extends React.Component {
         timer: null
     }
 
-    /** Immplenting Auth - Eitan
+    /** 1. Immplenting Auth - Eitan
      * 
-     * 1. Finding a dynamic way of getting games to show up
-     * 2. Putting Timer into global state(Redux) -Demetrio
+     * 1. Putting Timer into global state(Redux) -Demetrio
      */
 
     componentDidMount() {
@@ -29,7 +28,7 @@ class GameContainer extends React.Component {
     }
 
     arrayofGames = () => {
-        return this.state.apiRespone.map(gameEl => <GameCard key={gameEl.id} gameObject={gameEl} clickHandler={this.pickaGame}/> )
+        return this.state.apiRespone.map(gameEl =>  <GameCard key={gameEl.id} gameObject={gameEl} clickHandler={this.pickaGame}/>)
     }
 
 
@@ -39,7 +38,7 @@ class GameContainer extends React.Component {
         <h1> Game Container</h1>
         <Switch>
 
-            <Route path={`/games/${this.state.game}`} render={ () => {
+            <Route path='/games/math' render={ () => {
                 return(
                     <>
                     <MathGame timer={this.state.timer}/>

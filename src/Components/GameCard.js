@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class GameCard extends React.Component {
 
@@ -13,7 +14,10 @@ class GameCard extends React.Component {
 
         return (
            <div className="game-card" onClick={this.clickHandler}>
-               <h2>Name of the game: {game.name}</h2>
+              <Link to={`games/${game.name}`}>
+                <h2>Name of the game: {game.name}</h2>
+              </Link>
+               
                <p>Description: We don't have descriptions for each game, but if we make them this is where they would go. </p>
            </div>
         )
