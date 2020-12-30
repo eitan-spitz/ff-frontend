@@ -6,10 +6,26 @@ import GameContainer from './Containers/GameContainer';
 import SignupForm from './Components/SignupForm';
 import LoginForm from './Components/LoginForm'
 import Navbar from './Components/Navbar'
-import { signupUser, loginUser } from './Redux/actions';
+import { signupUser, loginUser, returningUser } from './Redux/actions';
 
 
 class App extends React.Component {
+
+  componentDidMount(){
+    const token = localStorage.getItem("token")
+    if(token){
+      fetch('http://localhost:3000//profile', {
+        method: "GET",
+        headers: {
+          "Authorization": 'Bearer ' + token
+        }
+      })
+        .then(r => r.json())
+        .then(returningUser => {
+          this.props.returning(returningUser)
+        })
+    }
+  }
 
   signupSubmitHandler = (userObj) => {
     this.props.signup(userObj)
@@ -38,7 +54,8 @@ class App extends React.Component {
 function mdp(dispatch){
   return {
     signup: (newUserObj) => dispatch(signupUser(newUserObj)),
-    login: (userObj) => dispatch(loginUser(userObj))
+    login: (userObj) => dispatch(loginUser(userObj)),
+    returning: (userObj) => dispatch(returningUser(userObj))
   }
 }
 

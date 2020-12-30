@@ -1,4 +1,4 @@
-import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN } from './actionTypes'
+import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING } from './actionTypes'
 
 export function incrementPoints() {
     return { type: INCREMENT_POINTS }
@@ -19,7 +19,10 @@ export function signupUser(userObj) {
             body: JSON.stringify({ user: userObj })
         })
             .then(r => r.json())
-            .then(newUserObj => dispatch({type: SIGNUP, payload: newUserObj}))
+            .then(newUserObj => {
+                localStorage.setItem("token", newUserObj.jwt)
+                dispatch({type: SIGNUP, payload: newUserObj})
+            })
             .catch(console.log)
     }
 }
@@ -35,7 +38,14 @@ export function loginUser(userObj) {
             body: JSON.stringify({ user: userObj })
         })
             .then(r => r.json())
-            .then(checkedUserObj => dispatch({type: LOGIN, payload: checkedUserObj}))
+            .then(checkedUserObj => {
+                localStorage.setItem("token", checkedUserObj.jwt)
+                dispatch({type: LOGIN, payload: checkedUserObj})
+            })
             .catch(console.log)
     }
+}
+
+export function returningUser(userObj) {
+    return {type: RETURNING, payload: userObj}
 }
