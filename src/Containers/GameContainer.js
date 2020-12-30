@@ -7,7 +7,6 @@ class GameContainer extends React.Component {
 
     state = {
         apiRespone: [],
-        game: null,
         timer: null
     }
 
@@ -24,7 +23,7 @@ class GameContainer extends React.Component {
     }
 
     pickaGame = (gameObj) => {
-        this.setState({game: gameObj.name, timer: gameObj.time_to_complete_round})
+        this.setState({timer: gameObj.time_to_complete_round})
     }
 
     arrayofGames = () => {
