@@ -21,7 +21,7 @@ export function signupUser(userObj) {
             .then(r => r.json())
             .then(newUserObj => {
                 localStorage.setItem("token", newUserObj.jwt)
-                dispatch({type: SIGNUP, payload: newUserObj})
+                dispatch({type: SIGNUP, payload: newUserObj.user})
             })
             .catch(console.log)
     }
@@ -40,7 +40,7 @@ export function loginUser(userObj) {
             .then(r => r.json())
             .then(checkedUserObj => {
                 localStorage.setItem("token", checkedUserObj.jwt)
-                dispatch({type: LOGIN, payload: checkedUserObj})
+                dispatch({type: LOGIN, payload: checkedUserObj.user})
             })
             .catch(console.log)
     }

@@ -23,7 +23,7 @@ class GameContainer extends React.Component {
                 headers: {
                     "Accepts": "application/json",
                     "Content-type": "application/json",
-                    "Authorization": 'Bearer ' + this.props.user.jwt
+                    "Authorization": 'Bearer ' + localStorage.getItem("token")
                 }
             })
             .then(r => r.json())
