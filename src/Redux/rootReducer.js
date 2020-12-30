@@ -10,6 +10,9 @@ function userReducer(prevState = defaultState.user, action){
         case "SIGNUP":
             console.log(action.payload)
             return action.payload
+        case "LOGIN":
+            console.log(action.payload)
+            return action.payload
         default:
             return prevState
     }

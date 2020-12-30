@@ -17,7 +17,14 @@ class GameContainer extends React.Component {
      */
 
     componentDidMount() {
-        fetch("http://localhost:3000/games")
+        fetch("http://localhost:3000/games", {
+            method: "GET",
+            headers: {
+                "Accepts": "application/json",
+                "Content-type": "application/json",
+                "Authorization": 'Bearer ' + this.props.user.jwt
+            }
+        })
         .then(r => r.json())
         .then(arrayofGames => this.setState({apiRespone: arrayofGames}))
         .catch(console.log)
