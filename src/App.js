@@ -1,15 +1,19 @@
 import './App.css';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux'
 import GameContainer from './Containers/GameContainer';
+import SignupForm from './Components/SignupForm';
+import { signupUser } from './Redux/actions';
 
 
 class App extends React.Component {
 
   componentDidMount(){
-    fetch("http://localhost:3000/users")
-      .then(r => r.json())
-      .then(users => console.log(users))
+  }
+
+  submitHandler = (userObj) => {
+    this.props.signup(userObj)
   }
 
   render(){
@@ -17,7 +21,8 @@ class App extends React.Component {
       <div className="App">
         <Switch>
           <Route path='/home' render={() => <h1>Welcome!</h1>} />
-          <Route path='/games' component={GameContainer} />
+          <Route path='/games' render={() => <GameContainer />} />
+          <Route path='/signup' render={() => <SignupForm submitHandler={this.submitHandler} />} />
         </Switch>
         
       </div>
@@ -25,4 +30,10 @@ class App extends React.Component {
   }
 }
 
-export default App;
+function mdp(dispatch){
+  return {
+    signup: (newUserObj) => dispatch(signupUser(newUserObj))
+  }
+}
+
+export default connect(null, mdp)(App);
