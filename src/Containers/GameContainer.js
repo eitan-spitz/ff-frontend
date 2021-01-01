@@ -12,7 +12,10 @@ class GameContainer extends React.Component {
 
     /** 1. Immplenting Auth - Eitan
      * 
-     * 1. Putting Timer into global state(Redux) -Demetrio
+     * 1. Routing Finished
+     * 2. Tracking Points
+     * 3. UserGames model
+     * 4. Finish Full CRUD
      */
 
     componentDidMount() {
