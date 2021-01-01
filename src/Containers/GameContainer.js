@@ -1,7 +1,8 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import GameCard from '../Components/GameCard';
-import MathGame from '../Components/MathGame';
+import React from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import GameCard from '../Components/GameCard'
+import MathGame from '../Components/MathGame'
 
 class GameContainer extends React.Component {
 
@@ -19,10 +20,19 @@ class GameContainer extends React.Component {
      */
 
     componentDidMount() {
-        fetch("http://localhost:3000/games")
-        .then(r => r.json())
-        .then(arrayofGames => this.setState({apiRespone: arrayofGames}))
-        .catch(console.log)
+        if(this.props.user){
+            fetch("http://localhost:3000/games", {
+                method: "GET",
+                headers: {
+                    "Accepts": "application/json",
+                    "Content-type": "application/json",
+                    "Authorization": 'Bearer ' + localStorage.getItem("token")
+                }
+            })
+            .then(r => r.json())
+            .then(arrayofGames => this.setState({apiRespone: arrayofGames}))
+            .catch(console.log)
+        }
     }
 
     pickaGame = (gameObj) => {
@@ -36,31 +46,42 @@ class GameContainer extends React.Component {
 
     render (){
         return (
-        <>
-        <h1> Game Container</h1>
-        <Switch>
-
-            <Route path='/games/math' render={ () => {
-                return(
+            <>
+                {this.props.user ? 
+                
                     <>
-                    <MathGame timer={this.state.timer}/>
-                    </>
-                )}
-            }/>
+                    <h1> Game Container</h1>
+                    <Switch>
 
-            <Route path="/games" render={ () => {
-                return (
-                    <>
-                    {this.arrayofGames()}
-                    </>
-                )}
-            } />
+                        <Route path='/games/math' render={ () => {
+                            return(
+                                <>
+                                <MathGame timer={this.state.timer}/>
+                                </>
+                            )}
+                        }/>
 
-        </Switch>
-        </>
+                        <Route path="/games" render={ () => {
+                            return (
+                                <>
+                                {this.arrayofGames()}
+                                </>
+                            )}
+                        } />
+
+                    </Switch>
+                    </>
+                : 
+                    <Redirect to="/home" />
+                }
+            </>
         )
     }
 }
 
+function msp(state) {
+    return {user: state.user}
+}
 
-export default GameContainer
+
+export default connect(msp, null)(GameContainer)
