@@ -40,7 +40,7 @@ class App extends React.Component {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route path='/home' render={() => <h1>Welcome!</h1>} />
+          <Route path='/home' render={() => <h1 className="welcome">Welcome!</h1>} />
           <Route path='/games' render={() => <GameContainer />} />
           <Route path='/signup' render={() => <SignupForm submitHandler={this.signupSubmitHandler} />} />
           <Route path='/login' render={() => <LoginForm submitHandler={this.loginSubmitHandler} />} />

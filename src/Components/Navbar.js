@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 class Navbar extends React.Component {
     render(){
         return(
-            <ul>
+            <ul className="nav-bar">
                 <NavLink to="/home" >
                     <li>Home</li>
                 </NavLink>

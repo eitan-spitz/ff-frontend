@@ -160,7 +160,7 @@ class MathGame extends React.Component {
                 : 
                 <> 
                 <MathForm solutionValue={this.state.solutionValue} submitHandler={this.submitHandler} changeHandler={this.changeHandler} />
-                <Timer timer={this.props.timer}/>
+                <Timer timer={this.props.timer} />
                 </>
                 }
                 {this.answerResponse()}

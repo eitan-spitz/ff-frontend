@@ -13,7 +13,7 @@ class GameContainer extends React.Component {
 
     /** 1. Immplenting Auth - Eitan
      * 
-     * 1. Routing Finished
+     * 1. Routing Finish
      * 2. Tracking Points
      * 3. UserGames model
      * 4. Finish Full CRUD
@@ -35,31 +35,43 @@ class GameContainer extends React.Component {
         }
     }
 
-    pickaGame = (gameObj) => {
-        this.setState({timer: gameObj.time_to_complete_round})
-    }
+   
 
     arrayofGames = () => {
-        return this.state.apiRespone.map(gameEl =>  <GameCard key={gameEl.id} gameObject={gameEl} clickHandler={this.pickaGame}/>)
+        return this.state.apiRespone.map(gameEl =>  <GameCard key={gameEl.id} gameObject={gameEl} />)
     }
+
+
 
 
     render (){
+
         return (
             <>
+            {console.log(this.state.apiRespone)}
+
                 {this.props.user ? 
                 
                     <>
                     <h1> Game Container</h1>
                     <Switch>
 
-                        <Route path='/games/math' render={ () => {
-                            return(
-                                <>
-                                <MathGame timer={this.state.timer}/>
-                                </>
-                            )}
-                        }/>
+                        <Route path='/games/:id' render={ (routerProps) => {
+                            
+                            const gameId = parseInt(routerProps.match.params.id)
+
+                            const foundGame = this.state.apiResponse.find(gameEl => gameEl.id === gameId)
+
+                            let gameCard
+
+                            if(foundGame){
+                                gameCard = <MathGame timer={foundGame.time_to_complete_round}/>
+                            } else {
+                                gameCard = <h1>Loading</h1>
+                            }
+
+                           return gameCard
+                        }}  />
 
                         <Route path="/games" render={ () => {
                             return (
