@@ -8,7 +8,7 @@ class Navbar extends React.Component {
             <div className="nav-bar">
                 
                 <NavLink to="/home" style={{ color: 'inherit', textDecoration: 'inherit'}} > 
-                    <button> Home  </button> 
+                    <button>Home</button> 
                 </NavLink>
                 
                 <NavLink to="/games" style={{ color: 'inherit', textDecoration: 'inherit'}}> 

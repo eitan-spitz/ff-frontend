@@ -12,12 +12,11 @@ class GameContainer extends React.Component {
         gameId: null
     }
 
-    /** 1. Immplenting Auth - Eitan
+    /** 
      * 
-     * 1. Routing Finish
-     * 2. Tracking Points
-     * 3. UserGames model
-     * 4. Finish Full CRUD
+     * 1. Finish Routing
+     * 2. Finish Full CRUD
+     * 3. CSS
      */
 
     componentDidMount() {
@@ -57,7 +56,7 @@ class GameContainer extends React.Component {
 
                         <Route path='/games/:name' render={ (routerProps) => {
                             
-                            {console.log('inside game route:', this.state.apiRespone)}
+                            
                             const gameName = routerProps.match.params.name
 
                             const foundGame = this.state.apiRespone.find(gameEl => gameEl.name === gameName)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+
 
 class LoginForm extends React.Component {
     state = {
@@ -11,8 +11,11 @@ class LoginForm extends React.Component {
         this.setState({ [e.target.name]: e.target.value})
     }
 
+    
+
     submitHandler = (e) => {
         e.preventDefault()
+
         this.props.submitHandler(this.state)
     }
 
@@ -24,10 +27,8 @@ class LoginForm extends React.Component {
                 <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.changeHandler} />
                 
                 
-           
-                <NavLink to='/home'>
-                    <button>Log In</button>
-                </NavLink>
+                <button>Log In</button>
+                
             </form>
         )
     }
