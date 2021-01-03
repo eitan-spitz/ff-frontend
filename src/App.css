@@ -23,5 +23,12 @@
 
 .nav-bar {
   list-style-type: none;
+  white-space: normal;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.nav-bar>li {
+  display: inline-block;
 }
 

@@ -48,19 +48,19 @@ class GameContainer extends React.Component {
 
         return (
             <>
-            {console.log(this.state.apiRespone)}
 
                 {this.props.user ? 
                 
-                    <>
+                <>
                     <h1> Game Container</h1>
                     <Switch>
 
-                        <Route path='/games/:id' render={ (routerProps) => {
+                        <Route path='/games/:name' render={ (routerProps) => {
                             
-                            const gameId = parseInt(routerProps.match.params.id)
+                            {console.log('inside game route:', this.state.apiRespone)}
+                            const gameName = routerProps.match.params.name
 
-                            const foundGame = this.state.apiResponse.find(gameEl => gameEl.id === gameId)
+                            const foundGame = this.state.apiRespone.find(gameEl => gameEl.name === gameName)
 
                             let gameCard
 
