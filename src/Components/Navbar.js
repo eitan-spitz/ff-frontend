@@ -6,30 +6,31 @@ class Navbar extends React.Component {
     render(){
         return(
             <div className="nav-bar">
-                <button>
-                    <NavLink to="/home" style={{ color: 'inherit', textDecoration: 'inherit'}} > Home </NavLink>
-                </button>
-
-                <button>
-                    <NavLink to="/games" style={{ color: 'inherit', textDecoration: 'inherit'}}> Games </NavLink>
-                </button>
-
-                <button>
-                    <NavLink to="/signup" style={{ color: 'inherit', textDecoration: 'inherit'}}>Sign Up </NavLink>   
-                </button>
                 
+                <NavLink to="/home" style={{ color: 'inherit', textDecoration: 'inherit'}} > 
+                    <button> Home  </button> 
+                </NavLink>
+                
+                <NavLink to="/games" style={{ color: 'inherit', textDecoration: 'inherit'}}> 
+                    <button>Games</button> 
+                </NavLink>
+                    
                 {this.props.user ? 
 
                 <NavLink to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    <button onClick={()=> {localStorage.removeItem("token")}} >Log Out</button>
+                    <button onClick={()=> {localStorage.removeItem("token")}} >Log Out </button>
                 </NavLink>   
 
                 :
-                
-                <button>
-                    <NavLink to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}> Log In </NavLink>
-                </button>
-                
+                <>
+                    <NavLink to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}> 
+                        <button> Log In</button>
+                    </NavLink>
+            
+                    <NavLink to="/signup" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                        <button>Sign Up</button>
+                    </NavLink>   
+                </>
                 }
             </div>
         )
