@@ -8,7 +8,8 @@ class GameContainer extends React.Component {
 
     state = {
         apiRespone: [],
-        timer: null
+        timer: null,
+        gameId: null
     }
 
     /** 1. Immplenting Auth - Eitan
@@ -36,7 +37,7 @@ class GameContainer extends React.Component {
     }
 
     pickaGame = (gameObj) => {
-        this.setState({timer: gameObj.time_to_complete_round})
+        this.setState({timer: gameObj.time_to_complete_round, gameId: gameObj.id})
     }
 
     arrayofGames = () => {
@@ -56,7 +57,7 @@ class GameContainer extends React.Component {
                         <Route path='/games/math' render={ () => {
                             return(
                                 <>
-                                <MathGame timer={this.state.timer}/>
+                                <MathGame timer={this.state.timer} gameId={this.state.gameId}/>
                                 </>
                             )}
                         }/>

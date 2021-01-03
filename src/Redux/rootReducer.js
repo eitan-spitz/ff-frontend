@@ -28,6 +28,9 @@ function pointsReducer(prevState = defaultState.points, action){
             return ++prevState
         case "DECREMENT_POINTS":
             return --prevState
+        case "SET_POINTS":
+            console.log("in set points ",action.payload)
+            return action.payload
         default:
             return prevState
     }

@@ -1,4 +1,4 @@
-import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING } from './actionTypes'
+import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING, SET_POINTS } from './actionTypes'
 
 export function incrementPoints() {
     return { type: INCREMENT_POINTS }
@@ -6,6 +6,22 @@ export function incrementPoints() {
 
 export function decrementPoints() {
     return { type: DECREMENT_POINTS }
+}
+
+export function setPoints(userId, gameId) {
+    return function (dispatch, getState) {
+        fetch(`http://localhost:3000/users/${userId}/user_games`, {
+            method: "GET",
+            headers: {
+                "Authorization": 'Bearer ' + localStorage.getItem("token")
+            }
+        })
+        .then(r=>r.json())
+        .then(userGames => {
+            console.log("returned: ", userGames, "userid: ", userId, "gameid: ", gameId)
+            dispatch({type: SET_POINTS, payload: userGames.score})
+        })
+    }
 }
 
 export function signupUser(userObj) {

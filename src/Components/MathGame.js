@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import MathForm from './MathForm'
-import { incrementPoints, decrementPoints } from '../Redux/actions'
+import { incrementPoints, decrementPoints, setPoints } from '../Redux/actions'
 import Timer from './Timer'
 
 class MathGame extends React.Component {
@@ -12,6 +12,10 @@ class MathGame extends React.Component {
         gameStart: false,
         formula: null,
         response: null
+    }
+
+    componentDidMount(){
+        this.props.settingPoints(this.props.user.id, this.props.gameId)
     }
 
     simpleOperators = ["+", "-"]
@@ -171,13 +175,14 @@ class MathGame extends React.Component {
 }
 
 function msp(state) {
-    return { points: state.points }
+    return { points: state.points, user: state.user }
 }
 
 function mdp(dispatch) {
     return {
         increasePoints: () => dispatch(incrementPoints()),
-        decreasePoints: () => dispatch(decrementPoints())
+        decreasePoints: () => dispatch(decrementPoints()),
+        settingPoints: (userId, gameId) => dispatch(setPoints(userId, gameId))
     }
 }
 
