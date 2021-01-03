@@ -1,11 +1,61 @@
-import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING } from './actionTypes'
+import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING, SET_POINTS } from './actionTypes'
 
-export function incrementPoints() {
-    return { type: INCREMENT_POINTS }
+export function incrementPoints(userId, userGame) {
+    return function (dispatch, getState) {
+        let userGameId = localStorage.getItem("userGameId")
+        userGame.score += 1
+        fetch(`http://localhost:3000/users/${userId}/user_games/${userGameId}`, {
+            method: "PATCH",
+            headers: {
+                "Accepts": "application/json",
+                "Content-type": "application/json",
+                "Authorization": 'Bearer ' + localStorage.getItem("token")
+            },
+            body: JSON.stringify({userGame: userGame})
+        })
+        .then(r=>r.json())
+        .then(updatedUserGame => {
+            dispatch({type: INCREMENT_POINTS, payload: updatedUserGame.score})
+        })
+    }
 }
 
-export function decrementPoints() {
-    return { type: DECREMENT_POINTS }
+export function decrementPoints(userId, userGame) {
+    return function (dispatch, getState) {
+        let userGameId = localStorage.getItem("userGameId")
+        userGame.score -= 1
+        fetch(`http://localhost:3000/users/${userId}/user_games/${userGameId}`, {
+            method: "PATCH",
+            headers: {
+                "Accepts": "application/json",
+                "Content-type": "application/json",
+                "Authorization": 'Bearer ' + localStorage.getItem("token")
+            },
+            body: JSON.stringify({userGame: userGame})
+        })
+        .then(r=>r.json())
+        .then(updatedUserGame => {
+            dispatch({type: DECREMENT_POINTS, payload: updatedUserGame.score})
+        })
+    }
+}
+
+export function setPoints(userId, gameId) {
+    return function (dispatch, getState) {
+        fetch(`http://localhost:3000/users/${userId}/user_games`, {
+            method: "GET",
+            headers: {
+                "Authorization": 'Bearer ' + localStorage.getItem("token")
+            }
+        })
+        .then(r=>r.json())
+        .then(userGames => {
+            // when adding another game, need to add a filter to get the correct points for the game (using the game id)
+            console.log("returned: ", userGames, "userid: ", userId, "gameid: ", gameId)
+            localStorage.setItem("userGameId", userGames.id)
+            dispatch({type: SET_POINTS, payload: userGames})
+        })
+    }
 }
 
 export function signupUser(userObj) {

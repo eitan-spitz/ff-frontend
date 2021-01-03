@@ -8,7 +8,8 @@ class GameContainer extends React.Component {
 
     state = {
         apiRespone: [],
-        timer: null
+        timer: null,
+        gameId: null
     }
 
     /** 1. Immplenting Auth - Eitan
@@ -35,8 +36,6 @@ class GameContainer extends React.Component {
         }
     }
 
-   
-
     arrayofGames = () => {
         return this.state.apiRespone.map(gameEl =>  <GameCard key={gameEl.id} gameObject={gameEl} />)
     }
@@ -55,6 +54,7 @@ class GameContainer extends React.Component {
                     <h1> Game Container</h1>
                     <Switch>
 
+
                         <Route path='/games/:name' render={ (routerProps) => {
                             
                             {console.log('inside game route:', this.state.apiRespone)}
@@ -65,7 +65,7 @@ class GameContainer extends React.Component {
                             let gameCard
 
                             if(foundGame){
-                                gameCard = <MathGame timer={foundGame.time_to_complete_round}/>
+                                gameCard = <MathGame timer={foundGame.time_to_complete_round} gameId={foundGame.id}/>
                             } else {
                                 gameCard = <h1>Loading</h1>
                             }
