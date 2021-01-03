@@ -2,7 +2,8 @@ import {combineReducers} from 'redux'
 
 const defaultState = {
     user: null,
-    points: 0
+    points: 0,
+    userGame: null
 }
 
 function userReducer(prevState = defaultState.user, action){
@@ -25,11 +26,21 @@ function userReducer(prevState = defaultState.user, action){
 function pointsReducer(prevState = defaultState.points, action){
     switch (action.type) {
         case "INCREMENT_POINTS":
-            return ++prevState
+            return action.payload
         case "DECREMENT_POINTS":
-            return --prevState
+            return action.payload
         case "SET_POINTS":
             console.log("in set points ",action.payload)
+            return action.payload.score
+        default:
+            return prevState
+    }
+}
+
+function userGameReducer(prevState = defaultState.points, action){
+    switch (action.type) {
+        case "SET_POINTS":
+            console.log("in userGameReducer ",action.payload)
             return action.payload
         default:
             return prevState
@@ -39,7 +50,8 @@ function pointsReducer(prevState = defaultState.points, action){
 
 const rootReducer = combineReducers({
    user: userReducer,
-   points: pointsReducer
+   points: pointsReducer,
+   userGame: userGameReducer
 })
 
 export default rootReducer 

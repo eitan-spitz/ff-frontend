@@ -133,11 +133,11 @@ class MathGame extends React.Component {
         let submittedAnswer = parseInt(this.state.solutionValue)
 
         if (answer === submittedAnswer) {
-            this.props.increasePoints()
+            this.props.increasePoints(this.props.user.id, this.props.userGame)
             console.log("You Got it Right!")
             this.setState({ gameStart: !this.state.gameStart, formula: null, solutionValue: "", response: "correct" })
         } else {
-            this.props.decreasePoints()
+            this.props.decreasePoints(this.props.user.id, this.props.userGame)
             console.log("You Got it Wrong")
             this.setState({ solutionValue: "", response: "incorrect" })
         }
@@ -175,13 +175,13 @@ class MathGame extends React.Component {
 }
 
 function msp(state) {
-    return { points: state.points, user: state.user }
+    return { points: state.points, user: state.user, userGame: state.userGame }
 }
 
 function mdp(dispatch) {
     return {
-        increasePoints: () => dispatch(incrementPoints()),
-        decreasePoints: () => dispatch(decrementPoints()),
+        increasePoints: (userId, userGame) => dispatch(incrementPoints(userId, userGame)),
+        decreasePoints: (userId, userGame) => dispatch(decrementPoints(userId, userGame)),
         settingPoints: (userId, gameId) => dispatch(setPoints(userId, gameId))
     }
 }
