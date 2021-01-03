@@ -5,24 +5,33 @@ import { NavLink } from 'react-router-dom'
 class Navbar extends React.Component {
     render(){
         return(
-            <ul className="nav-bar">
-                <NavLink to="/home" >
-                    <li>Home</li>
-                </NavLink>
-                <NavLink to="/games" >
-                    <li>Games</li>
-                </NavLink>
-                <NavLink to="/signup" >
-                    <li>Sign Up</li>
-                </NavLink>
+            <div className="nav-bar">
+                <button>
+                    <NavLink to="/home" style={{ color: 'inherit', textDecoration: 'inherit'}} > Home </NavLink>
+                </button>
+
+                <button>
+                    <NavLink to="/games" style={{ color: 'inherit', textDecoration: 'inherit'}}> Games </NavLink>
+                </button>
+
+                <button>
+                    <NavLink to="/signup" style={{ color: 'inherit', textDecoration: 'inherit'}}>Sign Up </NavLink>   
+                </button>
+                
                 {this.props.user ? 
-                    <li onClick={()=> {localStorage.removeItem("token")}} >Log Out</li>
+
+                <NavLink to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                    <button onClick={()=> {localStorage.removeItem("token")}} >Log Out</button>
+                </NavLink>   
+
                 :
-                    <NavLink to="/login" >
-                        <li>Log in</li>
-                    </NavLink>
+                
+                <button>
+                    <NavLink to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}> Log In </NavLink>
+                </button>
+                
                 }
-            </ul>
+            </div>
         )
     }
 }
