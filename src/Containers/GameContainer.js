@@ -14,7 +14,7 @@ class GameContainer extends React.Component {
 
     /** 1. Immplenting Auth - Eitan
      * 
-     * 1. Routing Finished
+     * 1. Routing Finish
      * 2. Tracking Points
      * 3. UserGames model
      * 4. Finish Full CRUD
@@ -36,31 +36,42 @@ class GameContainer extends React.Component {
         }
     }
 
-    pickaGame = (gameObj) => {
-        this.setState({timer: gameObj.time_to_complete_round, gameId: gameObj.id})
+    arrayofGames = () => {
+        return this.state.apiRespone.map(gameEl =>  <GameCard key={gameEl.id} gameObject={gameEl} />)
     }
 
-    arrayofGames = () => {
-        return this.state.apiRespone.map(gameEl =>  <GameCard key={gameEl.id} gameObject={gameEl} clickHandler={this.pickaGame}/>)
-    }
+
 
 
     render (){
+
         return (
             <>
+
                 {this.props.user ? 
                 
-                    <>
+                <>
                     <h1> Game Container</h1>
                     <Switch>
 
-                        <Route path='/games/math' render={ () => {
-                            return(
-                                <>
-                                <MathGame timer={this.state.timer} gameId={this.state.gameId}/>
-                                </>
-                            )}
-                        }/>
+
+                        <Route path='/games/:name' render={ (routerProps) => {
+                            
+                            {console.log('inside game route:', this.state.apiRespone)}
+                            const gameName = routerProps.match.params.name
+
+                            const foundGame = this.state.apiRespone.find(gameEl => gameEl.name === gameName)
+
+                            let gameCard
+
+                            if(foundGame){
+                                gameCard = <MathGame timer={foundGame.time_to_complete_round} gameId={foundGame.id}/>
+                            } else {
+                                gameCard = <h1>Loading</h1>
+                            }
+
+                           return gameCard
+                        }}  />
 
                         <Route path="/games" render={ () => {
                             return (

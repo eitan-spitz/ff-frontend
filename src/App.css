@@ -6,7 +6,7 @@
   flex-wrap: wrap;
 }
 
-.game-card {
+.math {
   border-radius: 1rem;
   border: solid black 1px;
   padding: 1rem;
@@ -14,9 +14,21 @@
   width: 9rem;
 }
 
+
 .link {
   font-style: normal;
   color: black;
   text-decoration: none;
+}
+
+.nav-bar {
+  list-style-type: none;
+  white-space: normal;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.nav-bar>li {
+  display: inline-block;
 }
 
