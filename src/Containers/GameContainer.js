@@ -56,7 +56,6 @@ class GameContainer extends React.Component {
 
                         <Route path='/games/:name' render={ (routerProps) => {
                             
-                            
                             const gameName = routerProps.match.params.name
 
                             const foundGame = this.state.apiRespone.find(gameEl => gameEl.name === gameName)

@@ -9,6 +9,7 @@ import Navbar from './Components/Navbar'
 import { signupUser, loginUser, returningUser } from './Redux/actions';
 
 
+
 class App extends React.Component {
 
   componentDidMount(){
@@ -28,11 +29,11 @@ class App extends React.Component {
   }
 
   signupSubmitHandler = (userObj) => {
-    this.props.signup(userObj)
+      this.props.signup(userObj)
   }
 
   loginSubmitHandler = (userObj) => {
-    this.props.login(userObj)
+      this.props.login(userObj)
   }
 
   render(){
@@ -42,7 +43,12 @@ class App extends React.Component {
         <Switch>
           <Route path='/games' render={() => <GameContainer />} />
           <Route path='/signup' render={() => <SignupForm submitHandler={this.signupSubmitHandler} />} />
-          <Route path='/login' render={() => <LoginForm submitHandler={this.loginSubmitHandler} />} />
+          <Route path='/login' render={ (routerProps) => {
+            return(
+              <LoginForm submitHandler={this.loginSubmitHandler} routerProps={routerProps} />
+            )  
+            }} />
+
           <Route path='/home' render={() => <h1 className="welcome">Welcome!</h1>} />
         </Switch>
         

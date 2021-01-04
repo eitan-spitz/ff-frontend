@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 
-class Navbar extends React.Component {
-    render(){
+const Navbar = (props) => {
+    
         return(
             <div className="nav-bar">
                 
@@ -15,7 +15,7 @@ class Navbar extends React.Component {
                     <button>Games</button> 
                 </NavLink>
                     
-                {this.props.user ? 
+                {props.user ? 
 
                 <NavLink to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                     <button onClick={()=> {localStorage.removeItem("token")}} >Log Out </button>
@@ -35,7 +35,7 @@ class Navbar extends React.Component {
             </div>
         )
     }
-}
+
 
 function msp(state){
     return { user: state.user }
