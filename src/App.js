@@ -42,7 +42,14 @@ class App extends React.Component {
         <Navbar />
         <Switch>
           <Route path='/games' render={() => <GameContainer />} />
-          <Route path='/signup' render={() => <SignupForm submitHandler={this.signupSubmitHandler} />} />
+
+          <Route path='/signup' render={(routerProps) => {
+          
+          return(
+          <SignupForm submitHandler={this.signupSubmitHandler} routerProps={routerProps}/>
+          )
+          }} />
+
           <Route path='/login' render={ (routerProps) => {
             return(
               <LoginForm submitHandler={this.loginSubmitHandler} routerProps={routerProps} />
