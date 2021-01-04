@@ -7,6 +7,7 @@ import SignupForm from './Components/SignupForm';
 import LoginForm from './Components/LoginForm'
 import Navbar from './Components/Navbar'
 import { signupUser, loginUser, returningUser } from './Redux/actions';
+import Profile from './Components/Profile';
 
 
 
@@ -41,13 +42,17 @@ class App extends React.Component {
       <div className="App">
         <Navbar />
         <Switch>
+          <Route path='/profile' render={(routerProps)=> {
+            return(
+              <Profile routerProps={routerProps} />
+            )
+          }} />
           <Route path='/games' render={() => <GameContainer />} />
 
           <Route path='/signup' render={(routerProps) => {
-          
-          return(
-          <SignupForm submitHandler={this.signupSubmitHandler} routerProps={routerProps}/>
-          )
+            return(
+            <SignupForm submitHandler={this.signupSubmitHandler} routerProps={routerProps}/>
+            )
           }} />
 
           <Route path='/login' render={ (routerProps) => {

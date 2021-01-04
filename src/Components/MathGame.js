@@ -175,7 +175,11 @@ class MathGame extends React.Component {
 }
 
 function msp(state) {
-    return { points: state.points, user: state.user, userGame: state.userGame }
+    return { 
+        points: state.points, 
+        user: state.user, 
+        userGame: state.userGame
+    }
 }
 
 function mdp(dispatch) {

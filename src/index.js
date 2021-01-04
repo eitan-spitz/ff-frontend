@@ -11,6 +11,8 @@ import reportWebVitals from './reportWebVitals';
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
+export const URL = 'http://localhost:3000'
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
