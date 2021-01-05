@@ -7,12 +7,7 @@ import SignupForm from './Components/SignupForm';
 import LoginForm from './Components/LoginForm'
 import Navbar from './Components/Navbar'
 import { signupUser, loginUser, returningUser } from './Redux/actions';
-<<<<<<< HEAD
-import mountain_background from './assets/mountain_background.jpg';
-=======
 import Profile from './Components/Profile';
->>>>>>> 5498eda88962cb7e774fcc773a3aa6ee8f425eb9
-
 
 
 class App extends React.Component {
