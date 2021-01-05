@@ -44,8 +44,9 @@ class App extends React.Component {
           <Route path='/profile' render={(routerProps)=> {
             return(
               <Profile routerProps={routerProps} />
-            )
+              )
           }} />
+          
           <Route path='/games' render={() => <GameContainer />} />
 
           <Route path='/signup' render={(routerProps) => {

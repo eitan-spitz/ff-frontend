@@ -45,7 +45,7 @@ class GameContainer extends React.Component {
     render (){
 
         return (
-            <>
+            <div className="game-container">
 
                 {this.props.user ? 
                 
@@ -84,7 +84,7 @@ class GameContainer extends React.Component {
                 : 
                     <Redirect to="/home" />
                 }
-            </>
+            </div>
         )
     }
 }

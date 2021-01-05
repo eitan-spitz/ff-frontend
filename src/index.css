@@ -4,7 +4,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url(./assets/mountain_background.jpg);
-  background-size: 175vmax;
+  background-size: 200vh;
 }
 
 code {
