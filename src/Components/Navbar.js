@@ -1,12 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom'
+import freud_logo from '../assets/freud_logo.png'
 
 const Navbar = (props) => {
     
         return(
             <div className="nav-bar">
-                
+
+                <div className="nav-logo">
+                <img src={freud_logo} alt="freud with a cigar"/>
+                <h2>Freud<br />Folds</h2>
+                </div>
+
+                <div className="button-div">
+
                 <NavLink to="/home" style={{ color: 'inherit', textDecoration: 'inherit'}} > 
                     <button>Home</button> 
                 </NavLink>
@@ -32,6 +40,7 @@ const Navbar = (props) => {
                     </NavLink>   
                 </>
                 }
+                </div>
             </div>
         )
     }

@@ -7,6 +7,7 @@ import SignupForm from './Components/SignupForm';
 import LoginForm from './Components/LoginForm'
 import Navbar from './Components/Navbar'
 import { signupUser, loginUser, returningUser } from './Redux/actions';
+import mountain_background from './assets/mountain_background.jpg';
 
 
 
@@ -38,7 +39,7 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="App">
+      <div className="App" >
         <Navbar />
         <Switch>
           <Route path='/games' render={() => <GameContainer />} />

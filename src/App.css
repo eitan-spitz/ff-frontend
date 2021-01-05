@@ -2,36 +2,62 @@
   text-align: center;
 }
 
+
 .game-container {
-  flex-wrap: wrap;
+  border-bottom: 3px solid #444;
+  left: 100px;
+  height: 330px;
+  width: 100%
 }
 
 .game-card {
+  background-color: transparent;
   border-radius: 1rem;
   border: solid black 1px;
   padding: 1rem;
   height: auto;
-  width: 9rem;
+  width: 11rem;
+  transform-origin: bottom;
+}
+
+.game-card:hover{
+  animation-duration: 3.5s;
+  animation-iteration-count: infinite;
+  animation-name: bounce-6;
+  animation-timing-function: ease;
 }
 
 .game-card button {
-  display:inline-block;
-  padding:0.35em 1.2em;
   border:0.1em solid #FFFFFF;
-  margin:0 0.3em 0.3em 0;
   border-radius:0.12em;
   box-sizing: border-box;
-  text-decoration: none;
-  font-family:'Roboto',sans-serif;
-  font-weight:300;
+  background-color: transparent;
   color: black;
+  display:inline-block;
+  font-weight:300;
+  height: 75px;
+  width: auto;
+  margin:0 0.3em 0.3em 0;
+  padding:0.35em 1.2em;
+  text-decoration: none;
   text-align:center;
   transition: all 0.2s;
 }
 
 .game-card button:hover {
-  color: black;
+  color: white;
+  background-color: black;
   border-color: black;
+}
+
+@keyframes bounce-6 {
+  0%   { transform: scale(1,1)      translateY(0); }
+  10%  { transform: scale(1.1,.9)   translateY(0); }
+  30%  { transform: scale(.9,1.1)   translateY(-100px); }
+  50%  { transform: scale(1.05,.95) translateY(0); }
+  57%  { transform: scale(1,1)      translateY(-7px); }
+  64%  { transform: scale(1,1)      translateY(0); }
+  100% { transform: scale(1,1)      translateY(0); }
 }
 
 .game-card button:active {
@@ -47,24 +73,60 @@
 
 .nav-bar {
   color: black;
+  height: 125px;
   font-style: normal;
   text-decoration: none;
   white-space: normal;
-  display: inline-block;
   overflow: hidden;
 }
 
-.nav-bar button {
-  display:inline-block;
-  padding:0.85em 1.6em;
-  border:0.1em solid #FFFFFF;
-  background-color: white;
-  margin:0 0.3em 0.3em 0;
-  border-radius:0.12em;
+.nav-logo {
+  float: left;
+  display: inline-flex;
+}
+
+.nav-logo h2 {
+  color: black;
+  -webkit-text-stroke: .30px white; /* width and color */
+  font-family: 'Comfortaa', cursive;
+  font-size: 3.6vh;
+  font-weight: 1000;
+  left: -460px;
+  overflow: hidden;
+  opacity: 95%;
+  position: absolute;
+  top: 5px;
+  transform: rotate(-7deg);
+  width: 100%;
+  z-index: 1;
+  
+}
+
+.nav-logo img{
+  position: absolute;
+  border-radius:  250px;
+  height: 110px;
+  top: 10px;
+  width: auto;
+  z-index: 1;
+}
+
+.button-div {
+  float: right;
+}
+
+.button-div button {
+  padding:0.90em 1.8em;
+  border-style: transparent;
+  border-color: transparent;
+  border-width: 3.5px, 1px;
+  background-color: transparent;
+  margin:0 5em 5em 0;
   box-sizing: border-box;
   text-decoration: none;
-  font-family:'Roboto',sans-serif;
-  font-style: normal;
+  font-family: 'Open Sans', sans-serif;
+  font-style: inherit;
+  font-size: 1.4vw;
   font-weight: 300;
   color: black;
   text-align: center;
@@ -72,32 +134,31 @@
 }
 
 .nav-bar button:hover {
-  color: white;
-  border-color: rgba(255, 255, 255, 0.842);
-  background-color: black;
+  color: black;
+  border-color: rgba(9, 139, 133, 0.733);
+  border-width: 3.5px, 1px;
+  border-radius: .5rem;
+  background-color: transparent;
   text-decoration: none;
   font-style: normal;
-  box-shadow: 0 50px 18px 0 rgba(0,0,0,0.24), 0 2px 25px 0 rgba(0,0,0,0.19);
 
 }
 
 .nav-bar button:active {
   color: black;
-  border-color: black;
   text-decoration: none;
   font-style: normal;
 }
 
 .nav-bar button:visited {
   color: black;
-  border-color: black;
+  border-color: transparent;
   text-decoration: none;
   font-style: normal;
 }
 
 .nav-bar button:link {
   color: black;
-  border-color: black;
   text-decoration: none;
   font-style: normal;
 }
