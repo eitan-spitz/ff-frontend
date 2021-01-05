@@ -17,6 +17,8 @@ function userReducer(prevState = defaultState.user, action){
         case "RETURNING":
             console.log(action.payload)
             return action.payload
+        case "DELETE_USER":
+            return null
         default:
             return prevState
     }

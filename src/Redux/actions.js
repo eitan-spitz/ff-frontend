@@ -1,10 +1,11 @@
-import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING, SET_POINTS } from './actionTypes'
+import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING, SET_POINTS, DELETE_USER } from './actionTypes'
+import {URL} from '../index'
 
 export function incrementPoints(userId, userGame) {
     return function (dispatch, getState) {
         let userGameId = localStorage.getItem("userGameId")
         userGame.score += 1
-        fetch(`http://localhost:3000/users/${userId}/user_games/${userGameId}`, {
+        fetch(`${URL}/users/${userId}/user_games/${userGameId}`, {
             method: "PATCH",
             headers: {
                 "Accepts": "application/json",
@@ -24,7 +25,7 @@ export function decrementPoints(userId, userGame) {
     return function (dispatch, getState) {
         let userGameId = localStorage.getItem("userGameId")
         userGame.score -= 1
-        fetch(`http://localhost:3000/users/${userId}/user_games/${userGameId}`, {
+        fetch(`${URL}/users/${userId}/user_games/${userGameId}`, {
             method: "PATCH",
             headers: {
                 "Accepts": "application/json",
@@ -42,7 +43,7 @@ export function decrementPoints(userId, userGame) {
 
 export function setPoints(userId, gameId) {
     return function (dispatch, getState) {
-        fetch(`http://localhost:3000/users/${userId}/user_games`, {
+        fetch(`${URL}/users/${userId}/user_games`, {
             method: "GET",
             headers: {
                 "Authorization": 'Bearer ' + localStorage.getItem("token")
@@ -60,7 +61,7 @@ export function setPoints(userId, gameId) {
 
 export function signupUser(userObj) {
     return function (dispatch, getState) {
-        fetch('http://localhost:3000/users', {
+        fetch(`${URL}/users`, {
             method: "POST",
             headers: {
                 "Accepts": "application/json",
@@ -79,7 +80,7 @@ export function signupUser(userObj) {
 
 export function loginUser(userObj) {
     return function(dispatch, getState){
-        fetch('http://localhost:3000/login', {
+        fetch(`${URL}/login`, {
             method: "POST",
             headers: {
                 "Accepts": "application/json",
@@ -98,4 +99,23 @@ export function loginUser(userObj) {
 
 export function returningUser(userObj) {
     return {type: RETURNING, payload: userObj}
+}
+
+export function deleteUser(userId){
+    return function (dispatch){
+        fetch(`${URL}/users/${userId}`, {
+            method: "DELETE",
+            headers: {
+                "Accepts": "application/json",
+                "Content-type": "application/json",
+                "Authorization": 'Bearer ' + localStorage.getItem("token")
+            }
+        })
+        .then(r=>r.json())
+        .then(response => {
+            console.log(response)
+            localStorage.clear()
+            dispatch({type: DELETE_USER})
+        })
+    }
 }

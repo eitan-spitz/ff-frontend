@@ -24,15 +24,20 @@ const Navbar = (props) => {
                 </NavLink>
                     
                 {props.user ? 
+                <>
+                    <NavLink to="/profile" style={{ color: 'inherit', textDecoration: 'inherit'}}> 
+                        <button>Profile</button>
+                    </NavLink>
 
-                <NavLink to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    <button onClick={()=> {localStorage.removeItem("token")}} >Log Out </button>
-                </NavLink>   
+                    <NavLink to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                        <button onClick={()=> {localStorage.removeItem("token")}} >Log Out </button>
+                    </NavLink> 
+                </>  
 
                 :
                 <>
                     <NavLink to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}> 
-                        <button> Log In</button>
+                        <button>Log In</button>
                     </NavLink>
             
                     <NavLink to="/signup" style={{ color: 'inherit', textDecoration: 'inherit'}}>
