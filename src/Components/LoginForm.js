@@ -14,10 +14,10 @@ class LoginForm extends React.Component {
     submitHandler = (e) => {
         e.preventDefault()
 
-        this.props.submitHandler(this.state)
         
         let location = this.props.routerProps.history
-        location.replace("/profile")
+        location.replace("/home")
+        this.props.submitHandler(this.state)
 
     }
 
