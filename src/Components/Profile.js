@@ -10,13 +10,13 @@ const Profile = (props) => {
     }
 
     return(
-        <>
+        <span className="profile">
             <h1>Profile</h1>
             <h3>Username: {props.user.username}</h3>
             <h4>Email: {props.user.email}</h4>
             <button>Edit User</button>
             <button onClick={deleteHandler} >Delete User</button>
-        </>
+        </span>
     )
 }
 

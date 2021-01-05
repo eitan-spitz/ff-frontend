@@ -9,8 +9,9 @@ class GameCard extends React.Component {
 
         return (
             <div className="game-card">
-                    <h2>Name of the game: {game.name}</h2>
-                    <p>Description: We don't have descriptions for each game, but if we make them this is where they would go. </p>
+                    <h3>Name of the Game: {game.name} Challenge</h3>
+                    <h4>Description: {game.description}</h4>
+                    {console.log(game)}
                <NavLink to={ `/games/${game.name}` } className="link"> <button>Play Me!</button> </NavLink>
             </div> 
         )

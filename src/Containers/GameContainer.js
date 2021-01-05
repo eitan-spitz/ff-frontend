@@ -12,11 +12,10 @@ class GameContainer extends React.Component {
         gameId: null
     }
 
-    /** 
-     * 
-     * 1. Finish Routing
-     * 2. Finish Full CRUD
-     * 3. CSS
+    /**
+     * 1. Finish Full CRUD
+     * 2. Keep working on CSS
+     * 2a. Forms for Logging in and Signing up
      */
 
     componentDidMount() {
@@ -50,7 +49,7 @@ class GameContainer extends React.Component {
                 {this.props.user ? 
                 
                 <>
-                    <h1> Game Container</h1>
+                    <h1> Your Challenges!</h1>
                     <Switch>
 
 
