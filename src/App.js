@@ -8,6 +8,7 @@ import LoginForm from './Components/LoginForm'
 import Navbar from './Components/Navbar'
 import { signupUser, loginUser, returningUser } from './Redux/actions';
 import Profile from './Components/Profile';
+import Welcome from './Containers/Welcome';
 
 
 class App extends React.Component {
@@ -46,7 +47,7 @@ class App extends React.Component {
               <Profile routerProps={routerProps} />
               )
           }} />
-          
+
           <Route path='/games' render={() => <GameContainer />} />
 
           <Route path='/signup' render={(routerProps) => {
@@ -61,7 +62,7 @@ class App extends React.Component {
             )  
             }} />
 
-          <Route path='/home' render={() => <h1 className="welcome">Welcome!</h1>} />
+          <Route path='/home' render={() => <Welcome  />} />
         </Switch>
         
       </div>

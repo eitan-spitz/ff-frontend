@@ -2,6 +2,24 @@
   text-align: center;
 }
 
+.welcome {
+  font-weight: 800;
+  text-align: center;
+  margin-left: 10%;
+  margin-right: 50%;
+  width: 4em;
+  height: auto;
+}
+
+.welcome h1 {
+  font-weight:900;
+}
+.welcome p{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100em;
+}
+
 .game-container {
   height: 100vh;
   width: 75%;
