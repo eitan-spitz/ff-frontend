@@ -10,6 +10,7 @@ class MathGame extends React.Component {
         solution: null,
         solutionValue: "",
         gameStart: false,
+        gameEnd: true,
         formula: null,
         response: null
     }
@@ -121,7 +122,6 @@ class MathGame extends React.Component {
         }
     }
 
-
     changeHandler = (e) => {
         this.setState({ solutionValue: e.target.value })
     }
@@ -153,6 +153,10 @@ class MathGame extends React.Component {
         }
     }
 
+    atZero = () => {
+        this.setState({gameEnd: true, gameStart: false})
+    }
+
     render() {
         return (
             <>
@@ -164,7 +168,7 @@ class MathGame extends React.Component {
                 : 
                 <> 
                 <MathForm solutionValue={this.state.solutionValue} submitHandler={this.submitHandler} changeHandler={this.changeHandler} />
-                <Timer timer={this.props.timer} />
+                <Timer timer={this.props.timer} atZero={this.atZero}/>
                 </>
                 }
                 {this.answerResponse()}
