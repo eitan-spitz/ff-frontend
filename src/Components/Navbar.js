@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom'
 import freud_logo from '../assets/freud_logo.png'
+import { loggingOut } from '../Redux/actions'
 
 const Navbar = (props) => {
     
@@ -30,7 +31,10 @@ const Navbar = (props) => {
                     </NavLink>
 
                     <NavLink to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                        <button onClick={()=> {localStorage.removeItem("token")}} >Log Out </button>
+                        <button onClick={()=> {
+                        localStorage.removeItem("token")
+                        props.logOut()
+                        }} >Log Out </button>
                     </NavLink> 
                 </>  
 
@@ -55,4 +59,10 @@ function msp(state){
     return { user: state.user }
 }
 
-export default connect(msp, null)(Navbar)
+function mdp(dispatch){
+    return {
+        logOut: () => dispatch(loggingOut())
+    }
+}
+
+export default connect(msp, mdp)(Navbar)

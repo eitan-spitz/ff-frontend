@@ -3,6 +3,7 @@ export const DECREMENT_POINTS = "DECREMENT_POINTS"
 export const SET_POINTS = "SET_POINTS"
 export const DELETE_USER = "DELETE_USER"
 export const EDIT_USER = "EDIT_USER"
+export const LOGGING_OUT = "LOGGING_OUT"
 
 export const SIGNUP = "SIGNUP"
 export const LOGIN = "LOGIN"

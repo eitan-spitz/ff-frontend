@@ -22,6 +22,8 @@ function userReducer(prevState = defaultState.user, action){
         case "EDIT_USER":
             console.log(action.payload)
             return action.payload
+        case "LOGGING_OUT":
+            return null
         default:
             return prevState
     }

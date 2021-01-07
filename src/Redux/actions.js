@@ -1,4 +1,4 @@
-import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING, SET_POINTS, DELETE_USER, EDIT_USER } from './actionTypes'
+import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING, SET_POINTS, DELETE_USER, EDIT_USER, LOGGING_OUT } from './actionTypes'
 import {URL} from '../index'
 
 export function incrementPoints(userId, userGame) {
@@ -137,4 +137,8 @@ export function editUser(userObj, userId){
             dispatch({type: EDIT_USER, payload: returnedUser.user})
         })
     }
+}
+
+export function loggingOut(){
+    return { type: LOGGING_OUT}
 }
