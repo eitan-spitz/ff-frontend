@@ -283,7 +283,7 @@
 
 /* Timer CSS */
 .base-timer {
-  position: relative;
+  position: absolute;
   height: 150px;
   width: 150px;
 }
