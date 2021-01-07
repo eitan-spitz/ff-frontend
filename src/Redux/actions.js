@@ -1,4 +1,4 @@
-import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING, SET_POINTS, DELETE_USER } from './actionTypes'
+import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING, SET_POINTS, DELETE_USER, EDIT_USER } from './actionTypes'
 import {URL} from '../index'
 
 export function incrementPoints(userId, userGame) {
@@ -116,6 +116,25 @@ export function deleteUser(userId){
             console.log(response)
             localStorage.clear()
             dispatch({type: DELETE_USER})
+        })
+    }
+}
+
+export function editUser(userObj, userId){
+    return function (dispatch){
+        fetch(`${URL}/users/${userId}`, {
+            method: "PATCH",
+            headers: {
+                "Accepts": "application/json",
+                "Content-type": "application/json",
+                "Authorization": 'Bearer ' + localStorage.getItem("token")
+            },
+            body: JSON.stringify({ user: userObj })
+        })
+        .then(r=>r.json())
+        .then(returnedUser => {
+            console.log(returnedUser)
+            dispatch({type: EDIT_USER, payload: returnedUser.user})
         })
     }
 }

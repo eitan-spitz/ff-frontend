@@ -6,9 +6,11 @@ import GameContainer from './Containers/GameContainer';
 import SignupForm from './Components/SignupForm';
 import LoginForm from './Components/LoginForm'
 import Navbar from './Components/Navbar'
-import { signupUser, loginUser, returningUser } from './Redux/actions';
+import { signupUser, loginUser, returningUser, editUser } from './Redux/actions';
 import Profile from './Components/Profile';
 import Welcome from './Containers/Welcome';
+import {URL} from './index'
+import EditForm from './Components/EditForm';
 
 
 class App extends React.Component {
@@ -16,7 +18,7 @@ class App extends React.Component {
   componentDidMount(){
     const token = localStorage.getItem("token")
     if(token){
-      fetch('http://localhost:3000//profile', {
+      fetch(`${URL}/profile`, {
         method: "GET",
         headers: {
           "Authorization": 'Bearer ' + token
@@ -35,6 +37,10 @@ class App extends React.Component {
 
   loginSubmitHandler = (userObj) => {
       this.props.login(userObj)
+  }
+
+  editSubmitHandler = (userObj) => {
+    this.props.edit(userObj, this.props.user.id)
   }
 
   render(){
@@ -62,6 +68,12 @@ class App extends React.Component {
             )  
             }} />
 
+          <Route path='/edit' render={(routerProps) => {
+            return(
+              <EditForm submitHandler={this.editSubmitHandler} routerProps={routerProps} />
+            )
+          }} />
+
           <Route path='/home' render={() => <Welcome  />} />
         </Switch>
         
@@ -69,13 +81,19 @@ class App extends React.Component {
     );
   }
 }
+function msp(state){
+  return{
+    user: state.user
+  }
+}
 
 function mdp(dispatch){
   return {
     signup: (newUserObj) => dispatch(signupUser(newUserObj)),
     login: (userObj) => dispatch(loginUser(userObj)),
-    returning: (userObj) => dispatch(returningUser(userObj))
+    returning: (userObj) => dispatch(returningUser(userObj)),
+    edit: (userObj, userId) => dispatch(editUser(userObj, userId))
   }
 }
 
-export default connect(null, mdp)(App);
+export default connect(msp, mdp)(App);
