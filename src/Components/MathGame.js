@@ -10,9 +10,9 @@ class MathGame extends React.Component {
         solution: null,
         solutionValue: "",
         gameStart: false,
-        gameEnd: true,
         formula: null,
-        response: null
+        response: null,
+        gameEnd: "no"
     }
 
     componentDidMount(){
@@ -33,7 +33,7 @@ class MathGame extends React.Component {
         let operator = this.simpleOperators[Math.floor(Math.random() * this.simpleOperators.length)]
 
         this.simpleSolution(firstNum, secondNum, operator)
-        this.setState({ gameStart: !this.state.gameStart, formula: `${firstNum} ${operator} ${secondNum}`, response: null, solution: this.tempSolution })
+        this.setState({ formula: `${firstNum} ${operator} ${secondNum}`, response: null, solution: this.tempSolution })
     }
 
     lvl2 = () => {
@@ -42,7 +42,7 @@ class MathGame extends React.Component {
         let operator = this.simpleOperators[Math.floor(Math.random() * this.simpleOperators.length)]
 
         this.simpleSolution(firstNum, secondNum, operator)
-        this.setState({ gameStart: !this.state.gameStart, formula: `${firstNum} ${operator} ${secondNum}`, response: null, solution: this.tempSolution })
+        this.setState({  formula: `${firstNum} ${operator} ${secondNum}`, response: null, solution: this.tempSolution })
     }
 
     lvl3 = () => {
@@ -53,7 +53,7 @@ class MathGame extends React.Component {
         let operator2 = this.simpleOperators[Math.floor(Math.random() * this.simpleOperators.length)]
 
         this.complexSolution(firstNum, secondNum, thirdNum, operator1, operator2)
-        this.setState({ gameStart: !this.state.gameStart, formula: `${firstNum} ${operator1} ${secondNum} ${operator2} ${thirdNum}`, response: null, solution: this.tempSolution })
+        this.setState({  formula: `${firstNum} ${operator1} ${secondNum} ${operator2} ${thirdNum}`, response: null, solution: this.tempSolution })
     }
 
     lvl4 = () => {
@@ -64,7 +64,7 @@ class MathGame extends React.Component {
         let operator2 = this.simpleOperators[Math.floor(Math.random() * this.simpleOperators.length)]
 
         this.complexSolution(firstNum, secondNum, thirdNum, operator1, operator2)
-        this.setState({ gameStart: !this.state.gameStart, formula: `(${firstNum} ${operator1} ${secondNum}) ${operator2} ${thirdNum}`, response: null, solution: this.tempSolution })
+        this.setState({ formula: `(${firstNum} ${operator1} ${secondNum}) ${operator2} ${thirdNum}`, response: null, solution: this.tempSolution })
     }
 
     lvl5 = () => {
@@ -75,7 +75,7 @@ class MathGame extends React.Component {
         let operator2 = this.simpleOperators[Math.floor(Math.random() * this.simpleOperators.length)]
 
         this.complexSolution(firstNum, secondNum, thirdNum, operator1, operator2)
-        this.setState({ gameStart: !this.state.gameStart, formula: `(${firstNum} ${operator1} ${secondNum}) ${operator2} ${thirdNum}`, response: null, solution: this.tempSolution })
+        this.setState({formula: `(${firstNum} ${operator1} ${secondNum}) ${operator2} ${thirdNum}`, response: null, solution: this.tempSolution })
     }
 
     complexSolution = (x, y, z, operator1, operator2) => {
@@ -109,17 +109,20 @@ class MathGame extends React.Component {
 
 
     getLevel = () => {
-        if (this.props.points < 5) {
-            this.lvl1()
-        } else if (this.props.points < 10) {
-            this.lvl2()
-        } else if (this.props.points < 15) {
-            this.lvl3()
-        } else if (this.props.points < 20) {
-            this.lvl4()
-        } else if (this.props.points < 25) {
-            this.lvl5()
+        if(this.state.gameEnd === "no"){
+            this.setState({gameStart: true})
+            if (this.props.points < 5) {
+                this.lvl1()
+            } else if (this.props.points < 10) {
+                this.lvl2()
+            } else if (this.props.points < 15) {
+                this.lvl3()
+            } else if (this.props.points < 20) {
+                this.lvl4()
+            } else if (this.props.points < 25) {
+                this.lvl5()
         }
+       }    
     }
 
     changeHandler = (e) => {
@@ -134,13 +137,16 @@ class MathGame extends React.Component {
 
         if (answer === submittedAnswer) {
             this.props.increasePoints(this.props.user.id, this.props.userGame)
-            console.log("You Got it Right!")
-            this.setState({ gameStart: !this.state.gameStart, formula: null, solutionValue: "", response: "correct" })
+            this.correctAnswer()
         } else {
             this.props.decreasePoints(this.props.user.id, this.props.userGame)
-            console.log("You Got it Wrong")
             this.setState({ solutionValue: "", response: "incorrect" })
         }
+    }
+
+    correctAnswer = () => {
+        this.setState({formula: null, solutionValue: "", response: "correct" })
+        this.getLevel()
     }
 
     answerResponse = () => {
@@ -154,26 +160,37 @@ class MathGame extends React.Component {
     }
 
     atZero = () => {
-        this.setState({gameEnd: true, gameStart: false})
+        this.setState({gameEnd: "yes", gameStart: false})
     }
 
     render() {
         return (
-            <>
-                <h2>Math Game!</h2>
-                <h3>total points: {this.props.points}</h3>
-                <h3> {this.state.gameStart ? this.state.formula : null} </h3>
-                {!this.state.gameStart 
-                ? <button onClick={this.getLevel}>Start</button> 
-                : 
-                <> 
-                <MathForm solutionValue={this.state.solutionValue} submitHandler={this.submitHandler} changeHandler={this.changeHandler} />
-                <Timer timer={this.props.timer} atZero={this.atZero}/>
-                </>
-                }
+            <div className="game-start">
+
+                { this.state.gameEnd === "yes"
+                    ?
+                    <>
+                    <h3>End of the Round</h3>
+                    <p>Your total points were: {this.props.points}</p>
+                    <button onClick={this.getLevel}>Play again?</button>
+                    </>
+                    :
+                    <>
+                        {this.state.gameStart ? <h3>{this.state.formula} </h3>: <h2>Ready to Play the Math Game?</h2>}
+
+                        {!this.state.gameStart 
+                        ? <button onClick={this.getLevel}>Start</button> 
+                        : 
+                        <> 
+                        <MathForm solutionValue={this.state.solutionValue} submitHandler={this.submitHandler} changeHandler={this.changeHandler} />
+                        <Timer timer={this.props.timer} atZero={this.atZero}/>
+                        </>
+                        }
                 {this.answerResponse()}
-                
-            </>
+                    </>
+                }
+
+            </div>
         )
     }
 }

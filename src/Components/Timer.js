@@ -65,8 +65,8 @@ class Timer extends React.Component {
         
         return (
             <div className="base-timer">
-                <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <g clasName="basetimer__circle">
+                <svg className="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g className="basetimer__circle">
                         <circle className="base-timer__path-elapsed" cx="50" cy="45" r="45"/>
                         <path id="base-timer-path-remaining" stroke-dasharray={`${dashArray}`} className={`base-timer__path-remaining ${this.state.class}`}
                         d=" M 50, 50 
