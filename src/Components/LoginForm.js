@@ -22,14 +22,13 @@ class LoginForm extends React.Component {
 
     render(){
         return(
-            <form onSubmit={this.submitHandler} className="form">
-
-                <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.changeHandler} />
-                <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.changeHandler} />
-                
-                <button>Log In</button>
-               
-            </form>
+            <div className="form-div">
+                <form onSubmit={this.submitHandler} className="form">
+                    <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.changeHandler} />
+                    <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.changeHandler} />
+                    <button>Log In</button>
+                </form>
+            </div>
         )
     }
 }

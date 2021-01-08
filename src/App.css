@@ -285,6 +285,7 @@
 
 /* Timer CSS */
 .base-timer {
+  
   position: absolute;
   height: 150px;
   width: 150px;
@@ -292,6 +293,9 @@
 
 .base-timer__circle {
   fill: none;
+  position: absolute;
+  width: 150px;
+  height: 150px;
   stroke: none;
 }
 
@@ -300,7 +304,7 @@
   width: 150px;
   height: 150px;
   stroke-width: 7px;
-  stroke: grey;
+  stroke: transparent;
 }
 
 .base-timer__label {
@@ -341,3 +345,70 @@
   transform: scaleX(-1);
 }
 
+.form-div {
+  text-align:  center;
+}
+
+.form {
+  display: inline-block;
+  margin: 0 .90em .5em 0;
+  width: auto;
+}
+
+.form input{
+  border-color: transparent;
+  border-radius: .5rem;
+  background-color: rgba(255, 255, 255, 0.7333);
+  color: black;
+  font-size: 20px;
+  display: block;
+  margin: 0 .9em .5em 0;
+  padding: 10px;
+  text-align: center;
+  width: 250px;
+  opacity: 90%;
+}
+
+.form button {
+  color: black;
+  padding:0.90em 1.8em;
+  border-style: transparent;
+  border-color: rgba(9, 139, 133, 0.733);
+  border-width: 3.5px, 1px;
+  border-radius: .5rem;
+  background-color: transparent;
+  margin: 0 .50em .5em 0;
+  text-decoration: none;
+  font-style: normal;
+
+}
+
+.form button:hover {
+  color: rgba(33, 150, 144, 0.733);
+  border-color: rgba(28, 214, 205, 0.733);
+  border-width: 3.5px, 1px;
+  border-radius: .5rem;
+  background-color: transparent;
+  text-decoration: none;
+  font-style: normal;
+
+}
+
+.form button:active {
+  color: black;
+  text-decoration: none;
+  font-style: normal;
+}
+
+.form button:visited {
+  color: black;
+  border-color: transparent;
+  text-decoration: none;
+  font-style: normal;
+}
+
+.form button:link {
+  color: black;
+  text-decoration: none;
+  font-style: normal;
+}
