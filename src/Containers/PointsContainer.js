@@ -1,6 +1,4 @@
 import React from 'react'
-import { incrementPoints, decrementPoints, setPoints } from '../Redux/actions'
-import { connect } from 'react-redux'
 
 const PointsContainer = (props) => {
 
@@ -8,7 +6,7 @@ const PointsContainer = (props) => {
      Let me know if there is anything you need me to do. I'll be waking up at 7am to make sure everything is working just fine */
    
     return(
-        <h1>{props.points}</h1>
+        <h1>total points: {props.points}</h1>
     )
 }    
 

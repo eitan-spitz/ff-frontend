@@ -6,14 +6,14 @@ import Timer from './Timer'
 import Points from '../Containers/PointsContainer'
 
 class MathGame extends React.Component {
-
+    /* I decided to go with the original logic, I tweaked the logic you put in place to get it to work. the flow is now that after you answer the q you need to click play again and that reloads the game. for now Round = one question. I got rid of the points counter in the q, I felt like the player doesn't need to see it while answering math (maybe if we add it in small on the page, like in the top corner or something). */
     state = {
         solution: null,
         solutionValue: "",
-        gameStart: false,
+        roundStart: false,
         formula: null,
         response: null,
-        gameEnd: "no"
+        roundEnd: false
     }
 
     componentDidMount(){
@@ -109,28 +109,25 @@ class MathGame extends React.Component {
         }
     }
 
-    /** Restart resets the game's states so that we end up back on the starting of the game after we are done */
-    restartGame = () => {
-        this.setState({gameEnd: "no", response: null})
-        this.getLevel()
+    /** resets the game's states after every round so that we end up back on the starting of the game */
+    restartRound = () => {
+        this.setState({roundEnd: false, response: null})
     }
 
-    /** the first if statement asks if gameEnd is at "no" if it is then it goes ahead and looks for the level asscoiated. If we started at zero in terms of points then this would have to be changed */
+    /* got rid of the first if statment, gelLevel only gets called inside the round */
     getLevel = () => {
-        if(this.state.gameEnd === "no"){
-            this.setState({gameStart: true})
-            if (this.props.points < 5) {
-                this.lvl1()
-            } else if (this.props.points < 10) {
-                this.lvl2()
-            } else if (this.props.points < 15) {
-                this.lvl3()
-            } else if (this.props.points < 20) {
-                this.lvl4()
-            } else if (this.props.points < 25) {
-                this.lvl5()
+        this.setState({roundStart: true})
+        if (this.props.points < 5) {
+            this.lvl1()
+        } else if (this.props.points < 10) {
+            this.lvl2()
+        } else if (this.props.points < 15) {
+            this.lvl3()
+        } else if (this.props.points < 20) {
+            this.lvl4()
+        } else if (this.props.points < 25) {
+            this.lvl5()
         }
-       }    
     }
 
     changeHandler = (e) => {
@@ -153,10 +150,9 @@ class MathGame extends React.Component {
         }
     }
 
-    /** Sets State so that the level keeps on going */
+    /** Sets State so that the round ends*/
     correctAnswer = () => {
-        this.setState({formula: null, solutionValue: "", response: "correct" })
-        this.getLevel()
+        this.setState({formula: null, solutionValue: "", response: "correct", roundEnd: true, roundStart: false})
     }
 
     /** Had to create a way to have a random response from an array Used this and when called it will give a random statement */
@@ -173,7 +169,7 @@ class MathGame extends React.Component {
 
     /**In order to not have a boring repeat answer here we can get a random response of 3, if you want to add in more responses I'm more than happy to have it */
     answerResponse = () => {
-        const correctResponses = ["You Got It!", "Good Job!", "Woah look at you go!"]
+        const correctResponses = ["You Got It!", "Good Job!", "Woah look at you go!", "Fantastic!", "Big Brain Energy 🧠"]
         const incorrectResponses = ["Ooof", "You Sure You Know What You're Doing?", "I think Frued would be sad"]
 
         if (this.state.response === "correct") {
@@ -185,37 +181,35 @@ class MathGame extends React.Component {
         }
     }
 
-    /**atZero just happens when the timer lands at zero, we pass this through props for the timer */
+    /* added a lost point for hitting 0 */
     atZero = () => {
-        this.setState({gameEnd: "yes", gameStart: false})
+        this.props.decreasePoints(this.props.user.id, this.props.userGame)
+        this.setState({roundEnd: true, roundStart: false})
     }
 
     render() {
         return (
             <div className="game-start">
 
-                { this.state.gameEnd === "yes"
-                    ?
-                    <>
-                    <h3>End of the Round</h3>
-                    <p>Your Total Points Are: {this.props.points}</p>
-                    <button onClick={this.restartGame}>Play again?</button>
-                    </>
-                    :
-                    <div className="game-play">
-                        {this.state.gameStart ? <h3>{this.state.formula} </h3>: <h2>Ready to Play the Math Game?</h2>}
-
-                        {!this.state.gameStart 
-                        ? <button onClick={this.getLevel}>Start</button> 
-                        : 
-                        <> 
-                        <MathForm solutionValue={this.state.solutionValue} submitHandler={this.submitHandler} changeHandler={this.changeHandler} />
-                        <Timer timer={this.props.timer} atZero={this.atZero}/>
+                { this.state.roundEnd ?
+                        <>
+                        <h3>End of the Round</h3>
                         <Points points={this.props.points}/>
-                        <h4>Total Points: {this.props.points}</h4>
+                        <button onClick={this.restartRound}>Play again?</button>
                         </>
-                        }
-                    </div>
+                    :
+                        <div className="game-play">
+                            {this.state.roundStart ? <h3>{this.state.formula} </h3> : <h2>Ready?</h2>}
+
+                            {!this.state.roundStart ? 
+                                <button onClick={this.getLevel}>Start</button> 
+                            : 
+                                <> 
+                                <MathForm solutionValue={this.state.solutionValue} submitHandler={this.submitHandler} changeHandler={this.changeHandler} />
+                                <Timer timer={this.props.timer} atZero={this.atZero}/>
+                                </>
+                            }
+                        </div>
                 }
 
                 <h2 className="ans-response">{this.answerResponse()}</h2>
