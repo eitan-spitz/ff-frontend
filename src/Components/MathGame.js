@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import MathForm from './MathForm'
 import { incrementPoints, decrementPoints, setPoints } from '../Redux/actions'
 import Timer from './Timer'
+import Points from '../Containers/PointsContainer'
 
 class MathGame extends React.Component {
 
@@ -201,7 +202,7 @@ class MathGame extends React.Component {
                     <button onClick={this.restartGame}>Play again?</button>
                     </>
                     :
-                    <>
+                    <div className="game-play">
                         {this.state.gameStart ? <h3>{this.state.formula} </h3>: <h2>Ready to Play the Math Game?</h2>}
 
                         {!this.state.gameStart 
@@ -210,13 +211,14 @@ class MathGame extends React.Component {
                         <> 
                         <MathForm solutionValue={this.state.solutionValue} submitHandler={this.submitHandler} changeHandler={this.changeHandler} />
                         <Timer timer={this.props.timer} atZero={this.atZero}/>
-                        <h3>Total Points: {this.props.points}</h3>
+                        <Points points={this.props.points}/>
+                        <h4>Total Points: {this.props.points}</h4>
                         </>
                         }
-                {this.answerResponse()}
-                    </>
+                    </div>
                 }
 
+                <h2 className="ans-response">{this.answerResponse()}</h2>
             </div>
         )
     }

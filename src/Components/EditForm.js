@@ -14,7 +14,6 @@ class EditForm extends React.Component {
     submitHandler = (e) => {
         e.preventDefault()
         
-        
         let location = this.props.routerProps.history
         location.replace("/home")
         this.props.submitHandler(this.state)
@@ -22,7 +21,7 @@ class EditForm extends React.Component {
 
     render(){
         return(
-            <form onSubmit={this.submitHandler} >
+            <form onSubmit={this.submitHandler} className="form" >
                 <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.changeHandler} />
                 <input type="email" name="email" placeholder="email" value={this.state.email} onChange={this.changeHandler} />
                 <button>Edit User</button>
