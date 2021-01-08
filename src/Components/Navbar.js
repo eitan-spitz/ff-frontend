@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import freud_logo from '../assets/freud_logo.png'
 import { loggingOut } from '../Redux/actions'
 

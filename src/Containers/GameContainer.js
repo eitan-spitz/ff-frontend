@@ -29,7 +29,10 @@ class GameContainer extends React.Component {
                 }
             })
             .then(r => r.json())
-            .then(arrayofGames => this.setState({apiRespone: arrayofGames}))
+            .then(arrayofGames => {
+                console.log(arrayofGames)
+                this.setState({apiRespone: arrayofGames})
+            })
             .catch(console.log)
         }
     }
