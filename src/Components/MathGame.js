@@ -27,16 +27,6 @@ class MathGame extends React.Component {
         return Math.floor(Math.random() * (max - min)) + min
     }
 
-    randomResponse = (array) => {
-        let shuffled = array.slice(0), i = array.length, temp, index;
-        while (i--) {
-            index = Math.floor((i + 1) * Math.random());
-            temp = shuffled[index];
-            shuffled[index] = shuffled[i];
-            shuffled[i] = temp;
-        }
-        return shuffled.slice(0, 1)
-    }
 
     lvl1 = () => {
         let firstNum = this.getRndInteger(1, 10)
@@ -118,12 +108,13 @@ class MathGame extends React.Component {
         }
     }
 
+    /** Restart resets the game's states so that we end up back on the starting of the game after we are done */
     restartGame = () => {
         this.setState({gameEnd: "no", response: null})
         this.getLevel()
     }
 
-
+    /** the first if statement asks if gameEnd is at "no" if it is then it goes ahead and looks for the level asscoiated. If we started at zero in terms of points then this would have to be changed */
     getLevel = () => {
         if(this.state.gameEnd === "no"){
             this.setState({gameStart: true})
@@ -151,6 +142,7 @@ class MathGame extends React.Component {
         let answer = this.state.solution
         let submittedAnswer = parseInt(this.state.solutionValue)
 
+        /**Since we can't setState and do a function I created the helper function correctAnswer for when you get it right */
         if (answer === submittedAnswer) {
             this.props.increasePoints(this.props.user.id, this.props.userGame)
             this.correctAnswer()
@@ -160,11 +152,25 @@ class MathGame extends React.Component {
         }
     }
 
+    /** Sets State so that the level keeps on going */
     correctAnswer = () => {
         this.setState({formula: null, solutionValue: "", response: "correct" })
         this.getLevel()
     }
 
+    /** Had to create a way to have a random response from an array Used this and when called it will give a random statement */
+    randomResponse = (array) => {
+        let shuffled = array.slice(0), i = array.length, temp, index;
+        while (i--) {
+            index = Math.floor((i + 1) * Math.random());
+            temp = shuffled[index];
+            shuffled[index] = shuffled[i];
+            shuffled[i] = temp;
+        }
+        return shuffled.slice(0, 1)
+    }
+
+    /**In order to not have a boring repeat answer here we can get a random response of 3, if you want to add in more responses I'm more than happy to have it */
     answerResponse = () => {
         const correctResponses = ["You Got It!", "Good Job!", "Woah look at you go!"]
         const incorrectResponses = ["Ooof", "You Sure You Know What You're Doing?", "I think Frued would be sad"]
@@ -178,6 +184,7 @@ class MathGame extends React.Component {
         }
     }
 
+    /**atZero just happens when the timer lands at zero, we pass this through props for the timer */
     atZero = () => {
         this.setState({gameEnd: "yes", gameStart: false})
     }

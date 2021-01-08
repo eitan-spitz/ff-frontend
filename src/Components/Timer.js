@@ -2,6 +2,12 @@ import React from 'react'
 
 class Timer extends React.Component {
 
+    /** Time alotted is so we can keep track of how much time we are supposed to have. You can use this to set limits on how much time exists
+     * Timer is basically Time Left, if you wanted to add seconds this is where it would be
+     * Class changes depending on how much time is left. If you look at the CSS you'll see how it gets changed 
+     * DashArray is what we need to keep track of the circle as it goes down
+     */
+
     state = {
         timeAlotted: this.props.timer,
         timer: this.props.timer,
@@ -40,19 +46,17 @@ class Timer extends React.Component {
     componentDidMount(){
         this.myInterval = setInterval(() => {
                 const currentTime = this.state.timer - 1
-                const circleDasharray = `${(
-                    this.calculateTimeFraction() * 283
-                  ).toFixed(0)} 283`
+                const circleDasharray = `${(this.calculateTimeFraction() * 283).toFixed(0)} 283`    //CircleDash Array is used to determine where the ring should be at
 
-                this.colorCodes(currentTime)
-                this.setState({timer: currentTime, dashArray: circleDasharray})
+                this.colorCodes(currentTime)    //with currentTime we figure out what color the ring should be
+                this.setState({timer: currentTime, dashArray: circleDasharray})     //the set state is now updating the timer every second and the ring around the timer
                 if(currentTime === 0){
-                    this.endofRound()
+                    this.endofRound()   //here we reference endofRound 
                 }       
             }, 1000)
         }
            
-
+        /**sets the clock to zero and callsback atZero from MathGame */
       endofRound = () => {
         clearInterval(this.myInterval)
         this.props.atZero()
@@ -64,6 +68,9 @@ class Timer extends React.Component {
         const dashArray = this.state.dashArray
         
         return (
+            /**All of the classNames are for the CSS code || cx, cy, r all the sive of the circle
+            d is the shape of the circle */
+
             <div className="base-timer">
                 <svg className="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <g className="basetimer__circle">
@@ -78,7 +85,7 @@ class Timer extends React.Component {
                     </g>
                 </svg>
                 <span id="base-timer-label" className="base-timer__label">   
-                    {this.formatTimeLeft(time)}
+                    {this.formatTimeLeft(time)} {/** Here we are just printing the time*/}
                 </span>
 
                 
