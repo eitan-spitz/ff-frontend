@@ -1,16 +1,16 @@
 import './App.css';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import GameContainer from './Containers/GameContainer';
 import SignupForm from './Components/SignupForm';
-import LoginForm from './Components/LoginForm'
-import Navbar from './Components/Navbar'
-import { signupUser, loginUser, returningUser, editUser } from './Redux/actions';
+import EditForm from './Components/EditForm';
+import LoginForm from './Components/LoginForm';
+import Navbar from './Components/Navbar';
+import { signupUser, loginUser, returningUser, editUser , deleteUser} from './Redux/actions';
 import Profile from './Components/Profile';
 import Welcome from './Containers/Welcome';
 import {URL} from './index'
-import EditForm from './Components/EditForm';
 
 
 class App extends React.Component {

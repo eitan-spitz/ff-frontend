@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import MathForm from './MathForm'
 import { incrementPoints, decrementPoints, setPoints } from '../Redux/actions'
 import Timer from './Timer'
-import Points from '../Containers/PointsContainer'
 
 class MathGame extends React.Component {
     /* I decided to go with the original logic, I tweaked the logic you put in place to get it to work. the flow is now that after you answer the q you need to click play again and that reloads the game. for now Round = one question. I got rid of the points counter in the q, I felt like the player doesn't need to see it while answering math (maybe if we add it in small on the page, like in the top corner or something). */
@@ -194,7 +193,6 @@ class MathGame extends React.Component {
                 { this.state.roundEnd ?
                         <>
                         <h3>End of the Round</h3>
-                        <Points points={this.props.points}/>
                         <button onClick={this.restartRound}>Play again?</button>
                         </>
                     :
