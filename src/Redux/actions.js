@@ -80,20 +80,30 @@ export function signupUser(userObj) {
 
 export function loginUser(userObj) {
     return function(dispatch, getState){
-        fetch(`${URL}/login`, {
-            method: "POST",
+        fetch("https://catfact.ninja/fact", {
+            method: "GET",
             headers: {
                 "Accepts": "application/json",
                 "Content-type": "application/json"
-            },
-            body: JSON.stringify({ user: userObj })
+            }
+            
         })
-            .then(r => r.json())
-            .then(checkedUserObj => {
-                localStorage.setItem("token", checkedUserObj.jwt)
-                dispatch({type: LOGIN, payload: checkedUserObj.user})
-            })
-            .catch(console.log)
+        .then(r => r.json())
+        .then(r => alert(r.fact))
+        // fetch(`${URL}/login`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Accepts": "application/json",
+        //         "Content-type": "application/json"
+        //     },
+        //     body: JSON.stringify({ user: userObj })
+        // })
+        //     .then(r => r.json())
+        //     .then(checkedUserObj => {
+        //         localStorage.setItem("token", checkedUserObj.jwt)
+        //         dispatch({type: LOGIN, payload: checkedUserObj.user})
+        //     })
+        //     .catch(console.log)
     }
 }
 

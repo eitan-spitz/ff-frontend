@@ -46,35 +46,12 @@ class App extends React.Component {
   render(){
     return (
       <div className="App" >
-        <Navbar />
         <Switch>
-          <Route path='/profile' render={(routerProps)=> {
-            return(
-              <Profile routerProps={routerProps} />
-              )
-          }} />
-
-          <Route path='/games' render={() => <GameContainer />} />
-
-          <Route path='/signup' render={(routerProps) => {
-            return(
-            <SignupForm submitHandler={this.signupSubmitHandler} routerProps={routerProps}/>
-            )
-          }} />
-
-          <Route path='/login' render={ (routerProps) => {
+          <Route path='/' render={ (routerProps) => {
             return(
               <LoginForm submitHandler={this.loginSubmitHandler} routerProps={routerProps} />
             )  
             }} />
-
-          <Route path='/edit' render={(routerProps) => {
-            return(
-              <EditForm submitHandler={this.editSubmitHandler} routerProps={routerProps} />
-            )
-          }} />
-
-          <Route path='/home' render={() => <Welcome  />} />
         </Switch>
         
       </div>
