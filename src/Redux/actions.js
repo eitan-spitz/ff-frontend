@@ -89,7 +89,7 @@ export function loginUser(userObj) {
             
         })
         .then(r => r.json())
-        .then(r => alert(r.fact))
+        .then(r => alert(r))
         // fetch(`${URL}/login`, {
         //     method: "POST",
         //     headers: {
