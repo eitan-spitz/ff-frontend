@@ -1,5 +1,5 @@
 import { INCREMENT_POINTS, DECREMENT_POINTS, SIGNUP, LOGIN, RETURNING, SET_POINTS, DELETE_USER, EDIT_USER, LOGGING_OUT } from './actionTypes'
-import {URL} from '../index'
+import {URL, PORT} from '../index'
 
 export function incrementPoints(userId, userGame) {
     return function (dispatch, getState) {
@@ -80,7 +80,7 @@ export function signupUser(userObj) {
 
 export function loginUser(userObj) {
     return function(dispatch, getState){
-        fetch("https://catfact.ninja/fact", {
+        fetch(`${URL}:${PORT}/cats`, {
             method: "GET",
             headers: {
                 "Accepts": "application/json",
